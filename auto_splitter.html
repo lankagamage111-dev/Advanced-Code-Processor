@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Splitter Tool</title>
+    <link rel="stylesheet" href="auto_splitter.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
+</head>
+<body>
+
+    <div class="splitter-container">
+        
+        <div class="input-section">
+            <label for="mixedInput" class="splitter-label">
+                <i class="fa-solid fa-code"></i> Paste Full HTML Code
+            </label>
+            <textarea id="mixedInput" class="splitter-textarea" rows="10" placeholder="Paste your complete HTML file content here (including <style> and <script> tags)..."></textarea>
+            <div class="button-group">
+                <button id="pasteBtn" class="splitter-button secondary">
+                    <i class="fa-solid fa-paste"></i> Paste
+                </button>
+                <button id="processSplitBtn" class="splitter-button primary">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i> Analyze & Split
+                </button>
+            </div>
+        </div>
+
+        <div id="splitterError" class="splitter-error"></div>
+
+        <div id="outputSection" class="output-section">
+            <h3 class="splitter-label">
+                <i class="fa-solid fa-check-circle"></i> Processing Complete!
+            </h3>
+            <p>Your files have been extracted, processed, and are ready for download.</p>
+            
+            <div class="download-grid">
+                <div class="download-card">
+                    <i class="fa-brands fa-html5 card-icon html"></i>
+                    <h4>index.html</h4>
+                    <span class="file-info" id="htmlInfo">Original: 0 KB | Minified: 0 KB</span>
+                    <button id="downloadHtmlBtn" class="splitter-button download">
+                        <i class="fa-solid fa-download"></i> Download HTML
+                    </button>
+                </div>
+                
+                <div class="download-card">
+                    <i class="fa-brands fa-css3-alt card-icon css"></i>
+                    <h4>style.css</h4>
+                    <span class="file-info" id="cssInfo">Original: 0 KB | Minified: 0 KB</span>
+                    <button id="downloadCssBtn" class="splitter-button download">
+                        <i class="fa-solid fa-download"></i> Download CSS
+                    </button>
+                </div>
+                
+                <div class="download-card">
+                    <i class="fa-brands fa-js card-icon js"></i>
+                    <h4>script.js</h4>
+                    <span class="file-info" id="jsInfo">Original: 0 KB | Obfuscated: 0 KB</span>
+                    <button id="downloadJsBtn" class="splitter-button download">
+                        <i class="fa-solid fa-download"></i> Download JS
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="auto_splitter.js"></script>
+</body>
+</html>

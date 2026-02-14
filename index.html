@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Code Processor</title>
+    <meta name="description" content="Professional JavaScript obfuscation and HTML/CSS minification tool. Enhance code security and performance with ease.">
+<meta name="keywords" content="JavaScript obfuscation, HTML minification, CSS minification, code processing, web development tools, code security, performance optimization">
+<meta property="og:title" content="Advanced Code Processor">
+<meta property="og:description" content="Discover SINHA AI, Sri Lanka's advanced AI platform offering smart tools.">
+<meta property="og:url" content="[SINHA AI අඩවියේ URL එක මෙතැනට]">
+<meta property="og:image" content="[SINHA AI ලාංඡනයේ URL එක මෙතැනට]">
+<meta property="og:type" content="website">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Advanced Code Processor">
+<meta name="twitter:description" content="Discover SINHA AI, Sri Lanka's advanced AI platform offering smart tools.">
+<meta name="twitter:image" content="[SINHA AI ලාංඡනයේ URL එක මෙතැනට]">
+<meta name="twitter:url" content="[SINHA AI අඩවියේ URL එක මෙතැනට]">
+
+<link rel="icon" type="image/png" sizes="32x32" href="logo.png">
+<link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+<link rel="apple-touch-icon" sizes="180x180" href="logo.png">
+<link rel="icon" type="image/png" href="logo.png">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+     <script src="https://cdn.jsdelivr.net/npm/javascript-obfuscator/dist/index.browser.js"></script>
+   <link rel="stylesheet" href="css/csstoolgo.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <button id="helpButton" class="button accent small help-button">
+                <i class="fa-solid fa-circle-question"></i> How To Use This App
+            </button>
+            <h1>Advanced Code Processor</h1>
+            <p>Professional JavaScript obfuscation and HTML/CSS minification</p>
+        </header>
+
+        <div class="main-grid">
+            <div class="code-section">
+               <div class="controls">
+                    <div class="control-group" style="align-items: center;">
+                        <span class="control-label">Type:</span>
+                        
+                        <select id="codeType" style="display: none;">
+                            <option value="javascript">Obfuscation to JavaScript</option>
+                            <option value="html">Minification HTML</option>
+                            <option value="css">Minification CSS</option>
+                        </select>
+                        
+                    <div id="tourStep_Type" class="control-toggle-group">
+                            <button class="toggle-button active" data-value="javascript">JS Obfuscation</button>
+                            <button class="toggle-button" data-value="html">HTML Minify</button>
+                            <button class="toggle-button" data-value="css">CSS Minify</button>
+                        </div>
+                    </div>
+                </div>
+
+               <div id="tourStep_Input" class="code-container">
+                  <div class="code-header">
+                        <span class="code-title">Input Code</span>
+                       <div class="header-buttons">
+                            <button id="pasteInputBtn" class="expand-button"><i class="fa-solid fa-paste"></i> Paste</button>
+                            <button id="clearInputBtn" class="button small secondary"><i class="fa-solid fa-trash-can"></i> Clear</button>
+                            <button id="copyInputBtn" class="button small danger"><i class="fa-solid fa-copy"></i> Copy</button>
+                            <button id="loadFileBtn" class="button small accent"><i class="fa-solid fa-folder-open"></i> Load File</button>
+                            <input type="file" id="fileInput" style="display: none;">
+                            <button class="expand-button" onclick="openModal('input')"><i class="fa-solid fa-expand"></i> Expand</button>
+                        </div>
+                    </div>
+                    <textarea id="inputCode" class="code-textarea" placeholder="Paste your code here..." rows="12"></textarea>
+                    <div id="inputProcessing" class="processing-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+
+                <div class="precision-container">
+                    <div class="precision-header">
+                        <span class="precision-title">Processing Precision</span>
+                        <span id="precisionValue" class="precision-value">0%</span>
+                    </div>
+                    <div class="precision-progress">
+                        <div id="precisionBar" class="precision-bar"></div>
+                    </div>
+                   <button id="processBtn" class="button accent" style="width: 100%;">
+                        <i class="fa-solid fa-bolt"></i> <span id="processText">Process Code</span>
+                    </button>
+                </div>
+
+             <div id="outputContainer" class="code-container">
+                    <div class="code-header">
+                        <span class="code-title">Processed Code</span>
+                        <div class="header-buttons">
+                            <button id="clearOutputBtn" class="button small secondary"><i class="fa-solid fa-trash-can"></i> Clear</button>
+                            <button id="copyOutputBtn" class="button small danger"><i class="fa-solid fa-copy"></i> Copy</button>
+                            <button id="downloadOutputBtn" class="expand-button"><i class="fa-solid fa-download"></i> Download</button>
+                            <button class="expand-button" onclick="openModal('output')"><i class="fa-solid fa-expand"></i> Expand</button>
+                        </div>
+                    </div>
+                    <textarea id="outputCode" class="code-textarea" placeholder="Processed code will appear here..." rows="12" readonly></textarea>
+                    <div id="outputProcessing" class="processing-overlay">
+                        <div class="spinner"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar">
+               <div id="tourStep_Stats" class="stats-panel">
+                    <h3 class="stats-title">Statistics</h3>
+                    <div class="stat-item">
+                        <span class="stat-label">Code Type</span>
+                        <span id="statType" class="stat-value">-</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Original Size</span>
+                        <span id="statOriginalSize" class="stat-value">0 bytes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Processed Size</span>
+                        <span id="statProcessedSize" class="stat-value">0 bytes</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Compression</span>
+                        <span id="statCompression" class="stat-value">0%</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Lines</span>
+                        <span id="statLines" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Characters</span>
+                        <span id="statChars" class="stat-value">0</span>
+                    </div>
+                    </div>
+                         <button id="refreshPageBtn" class="button accent" style="width: 100%;">
+                    <i class="fa-solid fa-arrows-rotate"></i> Refresh App
+                    </button>
+                     <button id="autoSplitterBtn" class="button accent" style="width: 100%; background: var(--warning); color: #000;">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Auto-Analyze & Split (BETA)
+                        </button>
+                      <button id="supportBtn" class="button secondary" style="width: 100%; margin-top: 0.75rem;">
+                    <i class="fa-solid fa-headset"></i> Customer Support
+                </button>
+                    <div id="notification-container" class="notification-container">
+                    </div>
+            </div>
+        </div>
+          <footer>
+        Powered by JGS LANKA Co. 2025 | Designed by Janitha Athma Herath 
+    </footer>
+    </div>
+
+    <!-- Modal -->
+    <div id="codeModal" class="modal">
+        <div class="modal-content">
+           <div class="modal-header">
+                <h3 id="modalTitle" class="modal-title">Code View</h3>
+                <button class="close-button" onclick="closeModal()"><i class="fa-solid fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <textarea id="modalTextarea" class="modal-textarea" readonly></textarea>
+            </div>
+        </div>
+    </div>
+
+    <div id="supportModal" class="modal">
+        <div class="modal-content" style="max-width: 500px;">
+           <div class="modal-header">
+                <h3 id="supportModalTitle" class="modal-title"><i class="fa-solid fa-headset"></i> Customer Support</h3>
+                <button id="closeSupportModalBtn" class="close-button">&times;</button>
+            </div>
+            <div class="modal-body" style="padding: 1.5rem;">
+                
+                <form id="supportForm">
+                    <div class="form-group">
+                        <label for="clientNameInput" class="form-label">Your Name:</label>
+                        <input type="text" id="clientNameInput" class="form-input" placeholder="Enter your name..." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="supportCategorySelect" class="form-label">Category:</label>
+                        <select id="supportCategorySelect" class="form-input">
+                            <option value="Technical Support">Technical Support</option>
+                            <option value="Suggestion">Suggestion</option>
+                            <option value="Idea">New Idea</option>
+                            <option value="General Feedback">General Feedback</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="supportMessageInput" class="form-label">Message:</label>
+                        <textarea id="supportMessageInput" class="form-textarea" rows="5" placeholder="Describe your issue or suggestion..." required></textarea>
+                    </div>
+
+                    <button id="sendSupportMsgBtn" type="submit" class="button accent" style="width: 100%;">
+                        <i class="fa-brands fa-whatsapp"></i> Send via WhatsApp
+                    </button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="js_go/js.js"></script>
+</body>
+</html>
